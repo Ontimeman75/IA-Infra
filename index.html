@@ -3,21 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portefeuille BZV2</title>
+    <title>Suivi de Portefeuille BZV2</title>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f0f2f5; display: flex; justify-content: center; padding: 20px; }
-        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); width: 100%; max-width: 1000px; }
-        h1 { color: #1e3a8a; text-align: center; font-size: 24px; }
-        .update-msg { text-align: center; color: #666; font-size: 12px; margin-bottom: 20px; }
-        iframe { width: 100%; height: 700px; border: none; }
+        body { 
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background-color: #f4f7f9; 
+            color: #2c3e50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .container {
+            width: 100%;
+            max-width: 900px;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        }
+        h1 { margin-bottom: 5px; color: #1a73e8; }
+        .subtitle { margin-bottom: 30px; color: #7f8c8d; font-size: 0.9em; }
+        
+        /* Conteneur pour rendre l'iframe responsive */
+        .iframe-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            border: 1px solid #e1e4e8;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 500px; /* J'ai augmenté un peu la hauteur pour le confort */
+            border: none;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 0.8em;
+            color: #bdc3c7;
+        }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>📊 Suivi de Portefeuille BZV2</h1>
-        <p class="update-msg">Actualisé en temps réel via Microsoft 365</p>
 
-        <iframe width="700" height="900" frameborder="0" scrolling="no" src="https://habeum-
+    <div class="container">
+        <h1>📊 Portefeuille BZV2</h1>
+        <p class="subtitle">Mise à jour automatique des cours via Microsoft 365</p>
+
+        <div class="iframe-wrapper">
+            <iframe frameborder="0" scrolling="no" src="https://habeum-my.sharepoint.com/personal/pascal_tarin_habeum_com/_layouts/15/Doc.aspx?sourcedoc={6d9b88ca-2f4a-43d8-8c12-8321ae81ddfd}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0"></iframe>
         </div>
+    </div>
+
+    <div class="footer">
+        Dernière consultation : <span id="date"></span>
+    </div>
+
+    <script>
+        // Petit script pour afficher l'heure de consultation
+        document.getElementById('date').innerText = new Date().toLocaleString();
+    </script>
+
 </body>
 </html>
