@@ -3,69 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suivi de Portefeuille BZV2</title>
+    <title>Dashboard BZV2 - Portfolio</title>
     <style>
         body { 
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
             margin: 0; 
             padding: 20px; 
-            background-color: #f4f7f9; 
-            color: #2c3e50;
+            background-color: #f0f4f8; 
             display: flex;
             flex-direction: column;
             align-items: center;
         }
         .container {
             width: 100%;
-            max-width: 900px;
+            max-width: 800px; /* Légèrement plus large que l'iframe pour l'esthétique */
             background: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            text-align: center;
         }
-        h1 { margin-bottom: 5px; color: #1a73e8; }
-        .subtitle { margin-bottom: 30px; color: #7f8c8d; font-size: 0.9em; }
-        
-        /* Conteneur pour rendre l'iframe responsive */
-        .iframe-wrapper {
-            position: relative;
-            width: 100%;
-            overflow: hidden;
+        h1 { color: #1e3a8a; margin-bottom: 5px; font-size: 1.8rem; }
+        .status-bar { 
+            font-size: 0.85rem; 
+            color: #64748b; 
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .dot { height: 8px; width: 8px; background-color: #22c55e; border-radius: 50%; display: inline-block; }
+
+        /* Conteneur de l'iframe */
+        .web-view {
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
-            border: 1px solid #e1e4e8;
-        }
-        
-        iframe {
-            width: 100%;
-            height: 500px; /* J'ai augmenté un peu la hauteur pour le confort */
-            border: none;
+            overflow: hidden;
+            background: #fff;
         }
 
-        .footer {
-            margin-top: 20px;
-            font-size: 0.8em;
-            color: #bdc3c7;
+        iframe {
+            display: block;
+            margin: 0 auto;
+            max-width: 100%; /* S'adapte si l'écran est plus petit que 700px */
+        }
+
+        .refresh-info {
+            margin-top: 15px;
+            font-size: 0.75rem;
+            color: #94a3b8;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>📊 Portefeuille BZV2</h1>
-        <p class="subtitle">Mise à jour automatique des cours via Microsoft 365</p>
-
-        <div class="iframe-wrapper">
-            <iframe frameborder="0" scrolling="no" src="https://habeum-my.sharepoint.com/personal/pascal_tarin_habeum_com/_layouts/15/Doc.aspx?sourcedoc={6d9b88ca-2f4a-43d8-8c12-8321ae81ddfd}&action=embedview&wdAllowInteractivity=False&wdHideGridlines=True&wdHideHeaders=True&wdDownloadButton=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0"></iframe>
+        <h1>📊 Suivi Portfolio BZV2</h1>
+        <div class="status-bar">
+            <span class="dot"></span> Données en direct de Microsoft 365
         </div>
-    </div>
 
-    <div class="footer">
-        Dernière consultation : <span id="date"></span>
+        <div class="web-view">
+            <iframe width="700" height="900" frameborder="0" scrolling="no" src="https://habeum-my.sharepoint.com/personal/pascal_tarin_habeum_com/_layouts/15/Doc.aspx?sourcedoc={6d9b88ca-2f4a-43d8-8c12-8321ae81ddfd}&action=embedview&wdAllowInteractivity=False&Item=Portfolio&wdHideGridlines=True&wdInConfigurator=True&wdInConfigurator=True&edaebf=rslc0"></iframe>
+        </div>
+
+        <p class="refresh-info">
+            L'affichage se synchronise automatiquement avec votre fichier Excel.<br>
+            Consulté le : <span id="clock"></span>
+        </p>
     </div>
 
     <script>
-        // Petit script pour afficher l'heure de consultation
-        document.getElementById('date').innerText = new Date().toLocaleString();
+        function updateClock() {
+            const now = new Date();
+            document.getElementById('clock').innerText = now.toLocaleDateString() + ' à ' + now.toLocaleTimeString();
+        }
+        updateClock();
     </script>
 
 </body>
